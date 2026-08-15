@@ -1,0 +1,4 @@
+{
+  "sources": [],
+  "schema": {"id":"unique-source-id","title":"Source title","type":"paper|book|website|dataset","year":2026,"url":"https://...","relatedIds":[]}
+}
