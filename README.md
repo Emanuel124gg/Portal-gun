@@ -1,21 +1,24 @@
 # Portal Gun
 
-**Personal Research OS** — uma infraestrutura digital para organizar pesquisas, hipóteses, experimentos e projetos.
+**Personal Research OS** — infraestrutura digital pessoal para organizar pesquisa, hipóteses, experimentos, fontes e projetos.
 
-> O Portal Gun não é uma plataforma de aulas. É um laboratório pessoal para pesquisa e desenvolvimento.
+> O Portal Gun não é uma plataforma de aulas. É um laboratório pessoal de pesquisa e desenvolvimento.
 
-## Estrutura
+## Aplicação
 
-- `index.html` — Research Hub
-- `knowledge.html` — Knowledge Base dinâmica
+- `index.html` — Research Hub / entrada principal
+- `knowledge.html` — Knowledge Base
+- `graph.html` — Knowledge Graph
 - `lab.html` — Research Console
-- `data/research.json` — base inicial estruturada
-- `script.js` — interações do Hub
-- `knowledge.js` — busca e filtros da Knowledge Base
-- `lab.js` — registros locais do laboratório
-- `style.css` — sistema visual
+- `experiments.html` — workspace de experimentos
+- `settings.html` — backup e restauração local
 
-## Modelo de conhecimento
+## Dados
+
+- `data/research.json` — conceitos, hipóteses, perguntas, experimentos e projetos
+- `data/sources.json` — registro estruturado de fontes científicas e outras referências
+
+## Método
 
 ```text
 PERGUNTA → HIPÓTESE → TESTE → OBSERVAÇÃO → RESULTADO → REVISÃO
@@ -34,11 +37,15 @@ O sistema separa conhecimento de referência, hipótese, observação, pergunta 
 - Multiverso e consciência
 - Desenvolvimento do próprio Portal Gun
 
-## Próximas fases
+## Dados locais
+
+O laboratório e o workspace de experimentos usam `localStorage` para permitir uso sem backend. A página **Settings** permite exportar e importar um backup JSON.
+
+## Roadmap
 
 1. Relações entre registros por IDs.
 2. Páginas individuais de pesquisa.
 3. Fontes e evidências vinculadas às afirmações.
-4. Grafo visual de conhecimento.
+4. Knowledge Graph mais completo.
 5. Sincronização/cloud e publicação.
 6. Camada de análise para descobrir conexões e perguntas pendentes.
