@@ -1,0 +1,21 @@
+const palette={concept:'#6ee7b7',hypothesis:'#a78bfa',question:'#94a3b8',experiment:'#5eead4'};
+const esc=s=>String(s).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let allNodes=[];let links=[];let activeId=null;
+async function load(){const r=await fetch('data/research.json');const d=await r.json();
+ allNodes=[...(d.concepts||[]).map(x=>({...x,kind:'concept'})),...(d.hypotheses||[]).map(x=>({...x,kind:'hypothesis'})),...(d.questions||[]).map(x=>({...x,kind:'question'})),...(d.experiments||[]).map(x=>({...x,kind:'experiment'}))];
+ const find=(id)=>allNodes.find(n=>n.id===id);const add=(a,b,reason)=>{if(find(a)&&find(b))links.push({a,b,reason})};
+ add('prefrontal','memory','interage com processos de memória de trabalho');add('prefrontal','cognitive-limit','ajuda a investigar limites executivos');
+ add('dopamine','state-strategy','pode participar da seleção de ações e motivação');add('norepinephrine','state-strategy','relaciona-se a alerta e controle dependente do contexto');add('adenosine','state-strategy','estado de vigília pode alterar desempenho');
+ add('dmn','state-strategy','pensamento espontâneo versus controle da tarefa');add('memory','state-memory','questão sobre codificação e recuperação');
+ add('state-strategy','cognitive-session','hipótese a ser investigada');add('focus-creativity','focus-creativity','experimento relacionado à própria pergunta');
+ render();
+}
+function render(){const q=(document.querySelector('#graphSearch')?.value||'').toLowerCase().trim();const visible=q?allNodes.filter(n=>(n.title+' '+(n.summary||n.description||'')+' '+n.kind).toLowerCase().includes(q)):allNodes;const canvas=document.querySelector('#graphCanvas');
+ document.querySelector('#graphStats').innerHTML=`<div><b>${visible.length}</b><span>nós visíveis</span></div><div><b>${links.length}</b><span>relações</span></div><div><b>${allNodes.filter(n=>n.kind==='hypothesis').length}</b><span>hipóteses</span></div>`;
+ const W=Math.max(canvas.clientWidth,760),H=Math.max(visible.length*70,520);const center={x:W/2,y:H/2};const positions=new Map();visible.forEach((n,i)=>{const r=Math.min(W,H)*.31;const angle=(i/Math.max(visible.length,1))*Math.PI*2;positions.set(n.id,{x:center.x+Math.cos(angle)*r,y:center.y+Math.sin(angle)*r})});
+ canvas.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img"></svg>`;const svg=canvas.querySelector('svg');
+ links.filter(l=>positions.has(l.a)&&positions.has(l.b)).forEach(l=>{const a=positions.get(l.a),b=positions.get(l.b);const line=document.createElementNS('http://www.w3.org/2000/svg','line');line.setAttribute('x1',a.x);line.setAttribute('y1',a.y);line.setAttribute('x2',b.x);line.setAttribute('y2',b.y);line.classList.add('graph-link');svg.appendChild(line)});
+ visible.forEach(n=>{const p=positions.get(n.id);const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.classList.add('graph-node');g.dataset.id=n.id;const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',p.x);c.setAttribute('cy',p.y);c.setAttribute('r',n.kind==='concept'?12:15);c.setAttribute('fill',palette[n.kind]||'#8b7cf6');const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',p.x);t.setAttribute('y',p.y+30);t.setAttribute('text-anchor','middle');t.textContent=n.title.length>24?n.title.slice(0,24)+'…':n.title;g.append(c,t);g.onclick=()=>showDetails(n);svg.appendChild(g)});
+}
+function showDetails(n){activeId=n.id;const related=links.filter(l=>l.a===n.id||l.b===n.id).map(l=>{const id=l.a===n.id?l.b:l.a;return {...(allNodes.find(x=>x.id===id)||{}),reason:l.reason}});document.querySelector('#graphDetails').innerHTML=`<span class="record-type">${esc(n.kind.toUpperCase())}</span><h2>${esc(n.title)}</h2><p>${esc(n.summary||n.description||n.area||'')}</p>${related.length?`<h3>Conexões</h3><ul>${related.map(x=>`<li><b>${esc(x.title)}</b><br><small>${esc(x.reason)}</small></li>`).join('')}</ul>`:'<p class="empty">Nenhuma conexão registrada.</p>'}`;}
+document.querySelector('#graphSearch')?.addEventListener('input',render);document.querySelector('#resetGraph')?.addEventListener('click',()=>{document.querySelector('#graphSearch').value='';render()});load().catch(()=>{document.querySelector('#graphCanvas').innerHTML='<p class="empty">Não foi possível carregar o grafo.</p>'});
