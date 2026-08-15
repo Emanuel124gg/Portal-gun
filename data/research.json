@@ -1,0 +1,29 @@
+{
+  "concepts": [
+    {"id":"prefrontal","title":"Córtex pré-frontal","type":"fact","area":"Neurociência","summary":"Rede central para várias funções executivas, em interação com outras regiões e redes cerebrais.","questions":["Quais componentes limitam o desempenho executivo?","Como fadiga, sono e estado de alerta alteram a performance?"]},
+    {"id":"dopamine","title":"Dopamina","type":"concept","area":"Neuromodulação","summary":"Sistema neuromodulatório relacionado a motivação, aprendizagem por reforço e seleção de ações, com efeitos dependentes de circuito e contexto."},
+    {"id":"norepinephrine","title":"Noradrenalina","type":"concept","area":"Neuromodulação","summary":"Sistema associado à regulação de alerta, resposta a estímulos e controle de ganho em diferentes circuitos."},
+    {"id":"adenosine","title":"Adenosina","type":"concept","area":"Sono e alerta","summary":"Sinal metabólico que se acumula durante a vigília e participa da pressão homeostática do sono."},
+    {"id":"dmn","title":"Default Mode Network","type":"concept","area":"Estados mentais","summary":"Rede associada a processamento interno, memória autobiográfica e pensamento espontâneo, entre outras funções."},
+    {"id":"memory","title":"Memória","type":"concept","area":"Cognição","summary":"Conjunto de processos de codificação, consolidação e recuperação, e não um armazenamento unitário."}
+  ],
+  "hypotheses": [
+    {"id":"state-strategy","title":"Estados mentais podem mudar a estratégia cognitiva","status":"open","summary":"Um estado mais focado pode favorecer controle da tarefa, enquanto maior pensamento espontâneo pode favorecer associação e exploração.","tests":["Comparar desempenho e geração de ideias em condições diferentes","Registrar estado subjetivo e desempenho separadamente"]},
+    {"id":"portal-memory","title":"O Portal Gun pode funcionar como memória externa","status":"open","summary":"Um sistema de conexões entre conceitos, fontes e experimentos pode reduzir a perda de contexto entre pesquisas.","tests":["Registrar uma pesquisa completa como grafo","Revisar conexões após uma semana"]}
+  ],
+  "questions": [
+    {"id":"cognitive-limit","title":"Qual é o limite cognitivo real?","area":"Cognição","status":"open"},
+    {"id":"focus-creativity","title":"Foco máximo é sempre desejável?","area":"Cognição","status":"open"},
+    {"id":"state-memory","title":"Como o estado mental altera codificação e recuperação?","area":"Memória","status":"open"}
+  ],
+  "experiments": [
+    {"id":"cognitive-session","title":"Sessões de estados cognitivos","status":"planned","metric":"desempenho + relato subjetivo","description":"Registrar condição, tarefa, desempenho, estado subjetivo e observações sem assumir causalidade a partir de uma única sessão."},
+    {"id":"focus-creativity","title":"Foco versus pensamento espontâneo","status":"planned","metric":"foco + geração de ideias","description":"Explorar o possível trade-off entre concentração sustentada e geração de associações."}
+  ],
+  "projects": [
+    {"id":"pg-core","code":"PG-CORE","title":"Portal Gun","description":"Infraestrutura central de pesquisa, conhecimento e experimentação."},
+    {"id":"pg-neuro","code":"PG-NEURO","title":"Laboratório de Neurociência","description":"Pesquisa sobre cérebro, neuroquímica, atenção, memória e estados mentais."},
+    {"id":"pg-mind","code":"PG-MIND","title":"Cognição & desempenho","description":"Protocolos e investigações sobre aprendizagem, concentração, memória e desempenho."},
+    {"id":"pg-multiverse","code":"PG-MULTIVERSE","title":"Multiverso & mente","description":"Experimentos mentais e análise psicológica de cenários especulativos."}
+  ]
+}
