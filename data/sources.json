@@ -1,4 +1,17 @@
 {
+  "version": 2,
   "sources": [],
-  "schema": {"id":"unique-source-id","title":"Source title","type":"paper|book|website|dataset","year":2026,"url":"https://...","relatedIds":[]}
+  "schema": {
+    "id":"unique-source-id",
+    "title":"Source title",
+    "type":"paper|book|website|dataset",
+    "year":2026,
+    "url":"https://...",
+    "authors":[],
+    "status":"unreviewed|reviewed|important",
+    "relatedIds":[],
+    "notes":"Why this source matters",
+    "evidenceFor":[],
+    "evidenceAgainst":[]
+  }
 }
